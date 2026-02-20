@@ -1,0 +1,16 @@
+[
+  {
+    "instruction": "How do I know if my brake pads need replacement?",
+    "input": "",
+    "output": "Signs of worn brake pads include: squealing or grinding noises when braking, vibration in steering wheel or brake pedal, longer stopping distances, brake pad warning light, or visible wear (pads less than 1/4 inch thick). Most brake pads last 30,000-70,000 miles depending on driving habits. Have your brakes inspected if you notice any of these signs - brake safety is critical.",
+    "category": "brakes",
+    "difficulty": "beginner"
+  },
+  {
+    "instruction": "What does it mean if my car is making a clicking sound when starting?",
+    "input": "",
+    "output": "A clicking sound when starting usually indicates a dead or weak battery. The clicking is the starter solenoid trying to engage but not having enough power. Other possible causes include: corroded battery terminals, loose battery connections, or a faulty starter motor. First, check battery voltage and connections. If battery is good, the starter motor may need replacement.",
+    "category": "electrical",
+    "difficulty": "intermediate"
+  }
+]

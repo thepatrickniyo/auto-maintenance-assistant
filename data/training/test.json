@@ -1,0 +1,16 @@
+[
+  {
+    "instruction": "How often should I change my engine oil?",
+    "input": "",
+    "output": "Most vehicles require an oil change every 5,000 to 7,500 miles, or every 6 months, whichever comes first. However, you should always check your vehicle's owner's manual for the manufacturer's specific recommendations. Some newer vehicles with synthetic oil can go up to 10,000 miles between changes. Regular oil changes are crucial for engine health and longevity.",
+    "category": "oil_change",
+    "difficulty": "beginner"
+  },
+  {
+    "instruction": "When should I replace my car battery?",
+    "input": "",
+    "output": "Car batteries typically last 3-5 years. Signs you need a replacement include: slow engine cranking, dimming headlights, battery warning light, corrosion on terminals, or if your battery is over 3 years old and you're experiencing starting issues. Extreme temperatures can shorten battery life. Have your battery tested annually after it's 3 years old.",
+    "category": "electrical",
+    "difficulty": "beginner"
+  }
+]
