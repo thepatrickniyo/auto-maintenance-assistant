@@ -206,7 +206,7 @@ To add more Q&A pairs:
 
 ## License
 
-[Specify your license here]
+MIT
 
 ## References
 
