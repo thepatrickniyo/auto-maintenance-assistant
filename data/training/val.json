@@ -1,16 +1,23 @@
 [
   {
-    "instruction": "How do I know if my brake pads need replacement?",
+    "instruction": "What is the difference between DOT 3 and DOT 4 brake fluid?",
     "input": "",
-    "output": "Signs of worn brake pads include: squealing or grinding noises when braking, vibration in steering wheel or brake pedal, longer stopping distances, brake pad warning light, or visible wear (pads less than 1/4 inch thick). Most brake pads last 30,000-70,000 miles depending on driving habits. Have your brakes inspected if you notice any of these signs - brake safety is critical.",
+    "output": "DOT 3 and DOT 4 are brake fluid specifications. DOT 4 has higher boiling point (446°F vs 401°F), better performance in high-heat situations, and absorbs moisture slower. However, DOT 4 is more expensive and can damage paint. Always use the type specified in your owner's manual - mixing types or using wrong type can cause brake failure. Brake fluid should be changed every 2-3 years.",
     "category": "brakes",
-    "difficulty": "beginner"
+    "difficulty": "intermediate"
   },
   {
-    "instruction": "What does it mean if my car is making a clicking sound when starting?",
+    "instruction": "What is the difference between synthetic and conventional oil?",
     "input": "",
-    "output": "A clicking sound when starting usually indicates a dead or weak battery. The clicking is the starter solenoid trying to engage but not having enough power. Other possible causes include: corroded battery terminals, loose battery connections, or a faulty starter motor. First, check battery voltage and connections. If battery is good, the starter motor may need replacement.",
-    "category": "electrical",
+    "output": "Synthetic oil is chemically engineered to provide better protection and performance than conventional oil. It flows better in cold temperatures, resists breakdown at high temperatures, and can last longer between changes. Conventional oil is derived directly from crude oil. Synthetic oil is more expensive but offers superior engine protection, especially in extreme conditions. Many modern vehicles require synthetic oil.",
+    "category": "oil_change",
     "difficulty": "intermediate"
+  },
+  {
+    "instruction": "What should I check before a long road trip?",
+    "input": "",
+    "output": "Before long trip: check tire pressure and tread depth, inspect tires for damage, check all fluid levels (oil, coolant, brake, transmission, power steering), test battery, check lights (headlights, brake lights, turn signals), inspect belts and hoses, ensure spare tire is inflated, pack emergency kit (jumper cables, tools, first aid), and have recent oil change if due. Consider professional inspection if trip is very long.",
+    "category": "general",
+    "difficulty": "beginner"
   }
 ]

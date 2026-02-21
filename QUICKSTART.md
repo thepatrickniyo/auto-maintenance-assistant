@@ -1,11 +1,13 @@
 # Quick Start Guide
 
+**Run all commands from the project root** (`auto-maintenance-assistant/`). For a full step-by-step list, see **RUN_COMMANDS.md**.
+
 ## Getting Started with Dataset Collection
 
 ### Step 1: Generate Initial Dataset
 
 ```bash
-python collect_dataset.py
+python scripts/collect_dataset.py
 ```
 
 This creates:
@@ -15,7 +17,7 @@ This creates:
 ### Step 2: Expand Dataset
 
 ```bash
-python expand_dataset.py
+python scripts/expand_dataset.py
 ```
 
 This adds 15 more Q&A pairs (total: 35 pairs)
@@ -23,7 +25,7 @@ This adds 15 more Q&A pairs (total: 35 pairs)
 ### Step 3: Prepare for Training
 
 ```bash
-python prepare_training_data.py
+python scripts/prepare_training_data.py
 ```
 
 This:
@@ -44,7 +46,7 @@ Check the generated files:
 
 ### Option A: Manual Addition via Code
 
-Edit `expand_dataset.py` and add Q&A pairs to the `scrape_manual_qa_pairs()` function:
+Edit `scripts/expand_dataset.py` and add Q&A pairs to the `scrape_manual_qa_pairs()` function:
 
 ```python
 {
@@ -58,10 +60,15 @@ Edit `expand_dataset.py` and add Q&A pairs to the `scrape_manual_qa_pairs()` fun
 ### Option B: Programmatic Addition
 
 ```python
+# Run from project root, or add project root to path
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("scripts").resolve()))
 from collect_dataset import AutoMaintenanceDatasetCollector
+from _project_root import PROJECT_ROOT
 
 collector = AutoMaintenanceDatasetCollector()
-collector.load_from_json("data/auto_maintenance_dataset.json")
+collector.load_from_json(str(PROJECT_ROOT / "data" / "auto_maintenance_dataset.json"))
 
 collector.add_qa_pair(
     question="How do I check my brake fluid?",
@@ -114,18 +121,14 @@ Before training, ensure:
    - Transcribe YouTube Q&A sections
 
 2. **Fine-tune Model:**
-   - Select base model (Gemma, TinyLlama)
-   - Implement LoRA fine-tuning
-   - Train on Google Colab
+   - Colab: open `notebooks/colab_finetune_car_maintenance.ipynb`
+   - Local: `python scripts/train_lora.py`
 
 3. **Evaluate:**
-   - BLEU/ROUGE scores
-   - Qualitative testing
-   - Compare base vs fine-tuned
+   - `python scripts/evaluate.py --peft_model car-maintenance-llm`
 
 4. **Deploy:**
-   - Create Gradio interface
-   - Allow user interaction
+   - `python app/app_gradio.py`
 
 ## Current Dataset Status
 

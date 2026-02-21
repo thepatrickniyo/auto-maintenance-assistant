@@ -1,16 +1,30 @@
 [
   {
-    "instruction": "How often should I change my engine oil?",
+    "instruction": "What is the difference between AWD and 4WD?",
     "input": "",
-    "output": "Most vehicles require an oil change every 5,000 to 7,500 miles, or every 6 months, whichever comes first. However, you should always check your vehicle's owner's manual for the manufacturer's specific recommendations. Some newer vehicles with synthetic oil can go up to 10,000 miles between changes. Regular oil changes are crucial for engine health and longevity.",
-    "category": "oil_change",
+    "output": "AWD (All-Wheel Drive) automatically distributes power to all wheels and is always engaged, providing better traction in various conditions. 4WD (Four-Wheel Drive) can be manually engaged/disengaged and is designed for off-road use and low-speed traction. AWD is better for on-road performance and handling, while 4WD excels in off-road situations. AWD systems are more complex and can be more expensive to maintain.",
+    "category": "drivetrain",
+    "difficulty": "intermediate"
+  },
+  {
+    "instruction": "What causes engine knocking and how do I fix it?",
+    "input": "",
+    "output": "Engine knocking (pinging) is caused by premature fuel ignition in the cylinder. Common causes: using lower octane fuel than required, carbon buildup, incorrect ignition timing, or engine overheating. Solutions: use higher octane fuel, clean carbon deposits, check timing, ensure proper cooling. Persistent knocking can damage pistons and should be addressed immediately. Modern engines have knock sensors that adjust timing automatically.",
+    "category": "engine",
+    "difficulty": "advanced"
+  },
+  {
+    "instruction": "What does the check engine light mean?",
+    "input": "",
+    "output": "The check engine light (CEL) indicates that your vehicle's onboard diagnostic system has detected a problem. It could be something minor like a loose gas cap or something more serious like an engine misfire. You should have your vehicle diagnosed by a mechanic or use an OBD-II scanner to read the error codes. Don't ignore it - even minor issues can lead to expensive repairs if left unchecked.",
+    "category": "diagnostics",
     "difficulty": "beginner"
   },
   {
-    "instruction": "When should I replace my car battery?",
+    "instruction": "How do I know if my brake pads need replacement?",
     "input": "",
-    "output": "Car batteries typically last 3-5 years. Signs you need a replacement include: slow engine cranking, dimming headlights, battery warning light, corrosion on terminals, or if your battery is over 3 years old and you're experiencing starting issues. Extreme temperatures can shorten battery life. Have your battery tested annually after it's 3 years old.",
-    "category": "electrical",
+    "output": "Signs of worn brake pads include: squealing or grinding noises when braking, vibration in steering wheel or brake pedal, longer stopping distances, brake pad warning light, or visible wear (pads less than 1/4 inch thick). Most brake pads last 30,000-70,000 miles depending on driving habits. Have your brakes inspected if you notice any of these signs - brake safety is critical.",
+    "category": "brakes",
     "difficulty": "beginner"
   }
 ]

@@ -7,14 +7,18 @@ lxml>=4.9.0
 pandas>=2.0.0
 numpy>=1.24.0
 
-# For LLM fine-tuning (install when ready to train)
-# transformers>=4.35.0
-# peft>=0.6.0
-# accelerate>=0.24.0
-# datasets>=2.14.0
-# torch>=2.0.0
-# bitsandbytes>=0.41.0  # For quantization (optional)
+# For LLM fine-tuning (Colab or local GPU)
+transformers>=4.35.0
+peft>=0.6.0
+accelerate>=0.24.0
+datasets>=2.14.0
+torch>=2.0.0
+bitsandbytes>=0.41.0
+trl>=0.7.0
 
-# For deployment (install when ready to deploy)
-# gradio>=4.0.0
-# streamlit>=1.28.0  # Alternative to Gradio
+# For evaluation (BLEU, ROUGE)
+nltk>=3.8.0
+rouge-score>=0.1.2
+
+# For deployment (Gradio chatbot)
+gradio>=4.0.0

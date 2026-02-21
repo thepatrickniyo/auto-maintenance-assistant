@@ -27,7 +27,7 @@ The dataset contains Q&A pairs covering various car maintenance topics including
 Run the collection script to generate an initial dataset:
 
 ```bash
-python collect_dataset.py
+python scripts/collect_dataset.py
 ```
 
 This will create:
@@ -39,7 +39,7 @@ This will create:
 Add more Q&A pairs using the expansion script:
 
 ```bash
-python expand_dataset.py
+python scripts/expand_dataset.py
 ```
 
 #### Option 3: Manual Addition
@@ -100,7 +100,7 @@ Each Q&A pair follows this structure:
 Convert the dataset to training format:
 
 ```bash
-python prepare_training_data.py
+python scripts/prepare_training_data.py
 ```
 
 This will:
@@ -135,39 +135,93 @@ This shows:
 4. Include edge cases and safety-critical information
 5. Cover different vehicle types (sedans, SUVs, trucks, hybrids, EVs)
 
-## Next Steps
+## Pipeline: From Data to Chatbot
 
-1. **Expand Dataset:**
-   - Run `expand_dataset.py` to add more Q&A pairs
-   - Manually add Q&A pairs from reliable sources
-   - Consider web scraping (with permission) from automotive sites
+### Step 1 — Scope (done)
+Assistant answers: maintenance advice, troubleshooting, service schedules, car symptoms → causes, DIY fixes.
 
-2. **Prepare for Training:**
-   - Run `prepare_training_data.py` to format data
-   - Review and clean the dataset
-   - Ensure diversity across categories and difficulty levels
+### Step 2 — Prepare dataset
+- **Clean:** `prepare_training_data.py` strips HTML, normalizes text, removes duplicates; optional relevance filter.
+- **Format:** Alpaca-style `instruction` / `input` / `output`.
+- **Split:** 80% train, 10% val, 10% test.
 
-3. **Fine-tune Model:**
-   - Select a base model (Gemma, TinyLlama, etc.)
-   - Implement LoRA fine-tuning
-   - Train on Google Colab with free GPU
+```bash
+python prepare_training_data.py
+```
 
-4. **Evaluate:**
-   - Use BLEU, ROUGE scores
-   - Qualitative testing
-   - Compare base vs fine-tuned model
+### Step 3 — Base model
+For Colab free GPU: **TinyLlama-1.1B-Chat** (recommended), or Gemma-2B / Phi-2.
 
-5. **Deploy:**
-   - Create web interface (Gradio recommended)
-   - Allow user interaction with fine-tuned model
+### Step 4 — Environment (Colab)
+```bash
+pip install transformers datasets peft accelerate bitsandbytes trl
+```
+
+### Step 5 — LoRA fine-tune
+- **Script (local):** `python scripts/train_lora.py`
+- **Colab notebook:** `notebooks/colab_finetune_car_maintenance.ipynb` — upload `data/training/train.json`, run all cells.
+
+Recommended: `learning_rate=2e-4`, `batch_size=2`, `epochs=2`, LoRA `r=16`, `max_length=512`.
+
+### Step 6 — Train and track
+- Use `EXPERIMENTS.md` to log: hyperparameters, GPU memory, training time, final loss.
+- Save model: `car-maintenance-llm/` (adapter + tokenizer).
+
+### Step 7 — Evaluate
+- **Quantitative:** BLEU, ROUGE, perplexity via `evaluate.py`.
+- **Qualitative:** Domain questions (e.g. “Why does my engine knock?”, “When change oil?”).
+- **Out-of-domain:** e.g. “Who is president?” — should refuse or answer weakly.
+
+```bash
+pip install nltk rouge-score
+python scripts/evaluate.py --base_model TinyLlama/TinyLlama-1.1B-Chat-v1.0 --peft_model car-maintenance-llm
+```
+
+### Step 8 — Save and export
+Model and tokenizer are saved under `car-maintenance-llm/`. From Colab, download the folder or zip it.
+
+### Step 9 — Chatbot (Gradio)
+```bash
+pip install gradio
+python app/app_gradio.py --model_path car-maintenance-llm
+```
+Optional: `--share` for a public link.
+
+### Step 10 — Deploy
+- **Colab:** Run `app_gradio.py` in Colab and use “Share” for a public link.
+- **Hugging Face Spaces:** Upload model and a Gradio app.
+- **Local:** Run `app_gradio.py` and open the local URL.
+
+### Step 11 — Document (report)
+Use `EXPERIMENTS.md`: dataset, preprocessing, LoRA settings, hyperparameters, training time, GPU usage, metrics table, base vs tuned comparison, chatbot screenshots.
+
+### Step 12 — Final testing
+Example scenarios: “When change timing belt?”, “Car shakes at highway speed”, “Brake pedal soft”, “Grinding noise when turning”.
+
+---
+
+## Next Steps (optional)
+
+1. **Expand dataset** to 1k–5k pairs: run `expand_dataset.py`, add from manuals/FAQs.
+2. **Tune hyperparameters:** try different LoRA rank, learning rate, epochs; log in `EXPERIMENTS.md`.
+3. **Improve evaluation:** add more test questions, human judgment on clarity and correctness.
 
 ## Project Structure
 
 ```
 auto-maintenance-assistant/
-├── collect_dataset.py          # Initial dataset collection
-├── expand_dataset.py           # Dataset expansion utilities
-├── prepare_training_data.py    # Format data for training
+├── app/                            # Chatbot UI
+│   ├── _project_root.py
+│   └── app_gradio.py
+├── notebooks/                      # Colab training
+│   └── colab_finetune_car_maintenance.ipynb
+├── scripts/                        # Data & training
+│   ├── _project_root.py
+│   ├── collect_dataset.py         # Initial dataset collection
+│   ├── expand_dataset.py          # Dataset expansion
+│   ├── prepare_training_data.py   # Clean + format + split (Alpaca)
+│   ├── train_lora.py             # LoRA fine-tuning
+│   └── evaluate.py               # BLEU, ROUGE, perplexity
 ├── data/
 │   ├── auto_maintenance_dataset.json
 │   ├── auto_maintenance_dataset.csv
@@ -175,8 +229,13 @@ auto-maintenance-assistant/
 │       ├── train.json
 │       ├── val.json
 │       └── test.json
+├── car-maintenance-llm/           # Saved model (after training)
+├── RUN_COMMANDS.md                # Step-by-step run commands
+├── EXPERIMENTS.md
 └── README.md
 ```
+
+**Run all commands from the project root.** See **RUN_COMMANDS.md** for step-by-step instructions.
 
 ## Requirements
 
